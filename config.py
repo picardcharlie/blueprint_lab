@@ -11,7 +11,11 @@ class Config():
     def init_app(app):
         pass
 
-# Calls the Config object out of the dictionary when "default" is called.
-#
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_TEST_URI") or 'sqlite:///' + os.path.join(basedir, "data_test.sqlite")
 
-config = {"default": Config}
+# Calls the Config object out of the dictionary when "default" is called.
+
+
+config = {"default": Config, "testing": TestingConfig}
